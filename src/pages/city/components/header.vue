@@ -1,10 +1,10 @@
 <template>
   <div class="header border-bottom">
-    <router-link to="/" tag="div" class="header-left"><span class="iconfont back-icon">&#xe600;</span></router-link>
+    <router-link to="/" tag="div" class="header-left"><span class="iconfont back-icon">&#xe680;</span></router-link>
     选择城市
     <div class="header-right">
       <router-link to="/" tag="div" class="item">
-        <div class="iconfont people-icon">&#xe636;</div><div class="people-text">首页</div>
+        <div class="iconfont people-icon">&#xe61d;</div><div class="people-text">首页</div>
       </router-link>
       <router-link to="/search" tag="div" class="item">
         <div class="iconfont people-icon">&#xe618;</div><div class="people-text">搜索</div>
@@ -27,13 +27,11 @@ export default {
     color: #fff
     text-align: center
     font-size: 18px
+    overflow: hidden
     .header-left
       float: left
-      font-size: 16px
       padding: 0 .2rem
       .back-icon
-        display: inline-block
-        transform: rotate(90deg)
         font-size: .6rem
     .header-right
       float: right
