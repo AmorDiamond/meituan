@@ -1,7 +1,7 @@
 <template>
   <div>
     <city-header></city-header>
-    <city-list :cities="cityList"></city-list>
+    <city-list :cities="cityList" :hotList="hotList"></city-list>
   </div>
 </template>
 <script>
@@ -16,7 +16,8 @@ export default {
   },
   data () {
     return {
-      cityList: {}
+      cityList: {},
+      hotList: []
     }
   },
   mounted () {
@@ -34,6 +35,7 @@ export default {
     getCityInfoSucc (res) {
       const data = res.data
       this.cityList = data.cities
+      this.hotList = data.hotCities
     }
   }
 }

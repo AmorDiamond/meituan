@@ -6,23 +6,17 @@
     <div class="area">
       <div class="area-title">热门城市</div>
       <div class="warpper border hot-city">
-        <div class="item border-rightbottom">北京</div>
-        <div class="item border-rightbottom">上海</div>
-        <div class="item border-rightbottom">成都</div>
-        <div class="item border-rightbottom">广州</div>
-        <div class="item border-rightbottom">深圳</div>
-        <div class="item border-rightbottom">天津</div>
-        <div class="item border-rightbottom">西安</div>
+        <div class="item border-rightbottom" v-for="item of hotList" :key="item.id">{{item.name}}</div>
       </div>
     </div>
-    <div class="area">
+    <div class="area" ref="allCity">
       <div class="area-title">全部城市</div>
       <div class="warpper border">
         <ul class="alphabet border-bottom">
-          <li class="alphabet-item" v-for="(item, key) of cities" :key="key">{{key}}</li>
+          <li class="alphabet-item" v-for="(item, key) of cities" :key="key" @click="letterClick(key)">{{key}}</li>
         </ul>
         <div class="list">
-          <div class="warpper-item border-bottom" v-for="(item, key) of cities" :key="key">
+          <div class="warpper-item border-bottom" v-for="(item, key) of cities" :key="key" :ref="key">
             <div class="item border-rightbottom">{{key}}</div>
             <div class="item border-rightbottom" v-for="city of item" :key="city.id">{{city.name}}</div>
           </div>
@@ -40,6 +34,28 @@ export default {
       default () {
         return {}
       }
+    },
+    hotList: Array
+  },
+  data () {
+    return {
+      allCityTop: 0
+    }
+  },
+  mounted () {
+    // this.allCityTop = this.$refs.allCity.offsetTop
+  },
+  updated () {
+    this.allCityTop = this.$refs.allCity.offsetTop
+  },
+  methods: {
+    letterClick (letter) {
+      const top = this.$refs[letter][0].offsetTop
+      // const scrollEl = document.documentElement.scrollTop || document.body.scrollTop
+      const scrollTop = top + this.allCityTop
+      document.documentElement.scrollTop = scrollTop
+      document.body.scrollTop = scrollTop // 苹果手机存在document.documentElement，但是一直为0，也无法通过给document.documentElement.scrollTop赋值让滚动条滚动到指定位置，所以需要加一行document.body.scrollTop = scrollTop
+      // 通过 document.documentElement.scrollTop || document.body.scrollTop无法判断使用哪个，因为是用于设置滚动条位置，不是获取滚动条位置，document.documentElement.scrollTop永远都是0
     }
   }
 }
