@@ -2,7 +2,7 @@
   <div class="like-list border-topbottom">
     <div class="list-title">猜你喜欢</div>
     <div class="list">
-      <div class="list-item border-top" v-for="item of list" :key="item.id">
+      <router-link :to="/groupDetail/+ item.id" tag="div" class="list-item border-top" v-for="item of list" :key="item.id">
         <img class="item-img" :src="item.imgUrl" alt="">
         <div class="item-info">
           <p class="info-title">{{item.title}}</p>
@@ -15,7 +15,7 @@
             <span class="sold-number">已售{{item.sold}}</span>
           </p>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>

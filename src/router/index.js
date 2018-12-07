@@ -19,7 +19,7 @@ export default new Router({
       component: City
     },
     {
-      path: '/groupDetail',
+      path: '/groupDetail/:id',
       name: 'GroupDetail',
       component: GroupDetail
     }
