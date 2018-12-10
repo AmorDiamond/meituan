@@ -2,15 +2,15 @@
   <div>
     <div class="empty-price-box" :style="emptyPriceStyle"></div>
     <div class="price border-bottom" ref="priceBox" :class="{'fixed-price': fixedPrice}">
-      <span class="app-price"><span class="number">156</span>元</span>
-      <span class="shop-price">门市价:252元</span>
+      <span class="app-price"><span class="number">{{priceData.price}}</span>元</span>
+      <span class="shop-price">门市价:{{priceData.shopPrice}}元</span>
       <button class="buy-btn">立即抢购</button>
     </div>
     <div class="icon-desc border-bottom">
       <ul class="icons">
         <li class="item color-ok"><span class="iconfont icon">&#xe613;</span>支持随时退款</li>
         <li class="item color-ok"><span class="iconfont icon">&#xe62e;</span>支持过期自动退</li>
-        <li class="item"><span class="iconfont icon">&#xe752;</span>已售1467</li>
+        <li class="item"><span class="iconfont icon">&#xe752;</span>已售{{priceData.soldNumber}}</li>
       </ul>
     </div>
   </div>
@@ -18,6 +18,11 @@
 <script>
 export default {
   name: 'DetailPrice',
+  props: {
+    priceInfo: {
+      type: Object
+    }
+  },
   data () {
     return {
       priceTop: 0,
@@ -38,6 +43,15 @@ export default {
   },
   destroyed () {
     window.removeEventListener('scroll', this.scrollHandle)
+  },
+  computed: {
+    priceData: function () {
+      return {
+        price: this.priceInfo.price,
+        shopPrice: this.priceInfo.shopPrice,
+        soldNumber: this.priceInfo.soldNumber
+      }
+    }
   },
   methods: {
     scrollHandle () {

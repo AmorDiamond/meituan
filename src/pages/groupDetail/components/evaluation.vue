@@ -1,7 +1,7 @@
 <template>
   <div class="evaluation">
     <div class="evaluation-hd border-bottom">
-      <star-evaluation :scoreNumber="scoreNumber" :starTotal="starTotal"></star-evaluation>
+      <star-evaluation :scoreNumber="evaluationData.scoreNumber" :starTotal="starTotal"></star-evaluation>
       <!--<div class="star-evaluation">
         <div class="star-line">
           <div class="star-box">
@@ -13,14 +13,11 @@
         </div>
         <span class="star-number">{{star}}</span>
       </div>-->
-      <div class="evaluation-total">173人评价<span class="iconfont evaluation-list-icon">&#xe661;</span></div>
+      <div class="evaluation-total">{{evaluationData.evaluationTotal}}人评价<span class="iconfont evaluation-list-icon">&#xe661;</span></div>
     </div>
     <div>
       <ul class="evaluation-tag border-bottom">
-        <li class="tag-item">服务热情81</li>
-        <li class="tag-item">服务热情81</li>
-        <li class="tag-item">服务热情81</li>
-        <li class="tag-item">服务热情81</li>
+        <li class="tag-item" v-for="(item, index) of evaluationData.evaluationTag" :key="index">{{item}}</li>
       </ul>
     </div>
   </div>
@@ -29,20 +26,44 @@
 import StarEvaluation from 'common/evaluation/star-evaluation'
 export default {
   name: 'Evaluation',
+  props: {
+    evaluationInfo: {
+      type: Object
+    }
+  },
   components: {
     StarEvaluation
   },
   data () {
     return {
       starTotal: 5,
-      scoreNumber: 4.4,
       starStyle: {
         width: '100%'
       }
+      // scoreNumber: 4.4,
+      // evaluationTotal: 173,
+      // evaluationTag: [
+      //   '服务热情81',
+      //   '味道赞51',
+      //   '干净卫生38',
+      //   '环境优雅37',
+      //   '菜品健康37',
+      //   '分量足21',
+      //   '上菜快21'
+      // ]
     }
   },
   mounted () {
     // this.getEvaluationInfo()
+  },
+  computed: {
+    evaluationData: function () {
+      return {
+        scoreNumber: this.evaluationInfo.scoreNumber,
+        evaluationTotal: this.evaluationInfo.evaluationTotal,
+        evaluationTag: this.evaluationInfo.evaluationTag
+      }
+    }
   },
   methods: {
     getEvaluationInfo () {
@@ -99,7 +120,7 @@ export default {
     box-sizing: border-box
     .tag-item
       float: left
-      padding: .15rem
+      padding: .14rem
       border: 1px solid #FDB338
       border-radius: .06rem
       margin: 0 .1rem .1rem 0

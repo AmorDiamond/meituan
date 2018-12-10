@@ -1,75 +1,83 @@
 <template>
-  <div class="evaluation-list border-topbottom">
-    <div class="hd-title border-bottom">
-      <span>评价</span>
-      <div class="star-evaluation">
-        <star-evaluation :scoreNumber="scoreNumber"></star-evaluation>
+  <div>
+    <div class="evaluation-list border-topbottom">
+      <div class="hd-title border-bottom">
+        <span>评价</span>
+        <div class="star-evaluation">
+          <star-evaluation :scoreNumber="scoreNumber"></star-evaluation>
+        </div>
       </div>
-    </div>
-    <div class="list border-bottom">
-      <!--<div class="evaluation-item border-top">
-        <div class="item-hd">
-          <img class="avatar" src="https://img.meituan.net/avatar/9cd231a9428adcdbf7f3de4c24425a8b67676.jpg@74w_74h_1e_1c" alt="">
-          <div class="info">
-            <p class="name">昵称</p>
-            <p>
-              <star-evaluation :showScore="false"></star-evaluation>
-              <span class="time">2018-12-08</span>
-            </p>
+      <div class="list border-bottom">
+        <!--<div class="evaluation-item border-top">
+          <div class="item-hd">
+            <img class="avatar" src="https://img.meituan.net/avatar/9cd231a9428adcdbf7f3de4c24425a8b67676.jpg@74w_74h_1e_1c" alt="">
+            <div class="info">
+              <p class="name">昵称</p>
+              <p>
+                <star-evaluation :showScore="false"></star-evaluation>
+                <span class="time">2018-12-08</span>
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="item-desc">
-          <p>我是第一次去海底劳龙湖三楼这家店吃东西，真心感受到温馨舒服的感觉，菜品也很好吃，份也足，难怪别人店里晚上和周末要等很久才有位子，里面上班的小哥哥，小姐们让人很开心，工作认真热情，让人感觉宾至如归的感觉，太喜欢了，环境也。很干净，下次还去他家吃饭！</p>
-        </div>
-        <div class="img-box">
-          <span class="img-con">
-            <img src="//p0.meituan.net/shaitu/4d4709ebe4d08cb885a5c026c8452de51770259.jpg@110w_110h_1e_1c" alt="">
-          </span>
-          <span class="img-con">
-            <img src="//p0.meituan.net/shaitu/396bbf1a72c3ba4c36a298df12d4a2d52089445.jpg@110w_110h_1e_1c" alt="">
-          </span>
-        </div>
-        <p class="shop-address">海底捞火锅（金牛凯德店）</p>
-      </div>-->
-      <div class="evaluation-item border-top" v-for="(item, index) of evaluations" :key="item.id">
-        <div class="item-hd">
-          <img class="avatar" :src="item.avatarUrl" alt="">
-          <div class="info">
-            <p class="name">{{item.nickname}}</p>
-            <p>
-              <star-evaluation :scoreNumber="item.scoreNumber" :showScore="false"></star-evaluation>
-              <span class="time">{{item.time}}</span>
-            </p>
+          <div class="item-desc">
+            <p>我是第一次去海底劳龙湖三楼这家店吃东西，真心感受到温馨舒服的感觉，菜品也很好吃，份也足，难怪别人店里晚上和周末要等很久才有位子，里面上班的小哥哥，小姐们让人很开心，工作认真热情，让人感觉宾至如归的感觉，太喜欢了，环境也。很干净，下次还去他家吃饭！</p>
           </div>
-        </div>
-        <div class="item-desc" @click="descHandleClick(index)">
-          <span v-for="(message, msgindex) of item.evaluationMsg" :key="msgindex" :class="{'hidden-msg': hiddenMsg(item, msgindex)}">{{message}}</span>
-          <span class="empty-msg" v-show="!item.showMore">......</span>
-          <span class="iconfont show-more-icon" v-if="item.evaluationMsg.length" :class="{'active-icon': item.showMore}">&#xe600;</span>
-        </div>
-        <div class="img-box">
-          <span class="img-con" v-for="(image, imgindex) of item.evaluationImg" :key="imgindex">
+          <div class="img-box">
+            <span class="img-con">
+              <img src="//p0.meituan.net/shaitu/4d4709ebe4d08cb885a5c026c8452de51770259.jpg@110w_110h_1e_1c" alt="">
+            </span>
+            <span class="img-con">
+              <img src="//p0.meituan.net/shaitu/396bbf1a72c3ba4c36a298df12d4a2d52089445.jpg@110w_110h_1e_1c" alt="">
+            </span>
+          </div>
+          <p class="shop-address">海底捞火锅（金牛凯德店）</p>
+        </div>-->
+        <div class="evaluation-item border-top" v-for="(item, index) of evaluations" :key="item.id">
+          <div class="item-hd">
+            <img class="avatar" :src="item.avatarUrl" alt="">
+            <div class="info">
+              <p class="name">{{item.nickname}}</p>
+              <p>
+                <star-evaluation :scoreNumber="item.scoreNumber" :showScore="false"></star-evaluation>
+                <span class="time">{{item.time}}</span>
+              </p>
+            </div>
+          </div>
+          <div class="item-desc" @click="descHandleClick(index)">
+            <span v-for="(message, msgindex) of item.evaluationMsg" :key="msgindex" :class="{'hidden-msg': hiddenMsg(item, msgindex)}">{{message}}</span>
+            <span class="empty-msg" v-show="!item.showMore">......</span>
+            <span class="iconfont show-more-icon" v-if="item.evaluationMsg.length" :class="{'active-icon': item.showMore}">&#xe600;</span>
+          </div>
+          <div class="img-box">
+          <span class="img-con" v-for="(image, imgindex) of item.evaluationImg" :key="imgindex" @click="imageHandleClick(index,imgindex)">
             <img :src="image" alt="">
           </span>
+          </div>
+          <p class="shop-address">{{item.shopAddress}}</p>
         </div>
-        <p class="shop-address">{{item.shopAddress}}</p>
+      </div>
+      <div class="evaluation-ft">
+        <span>查看全部175条评价</span><span class="iconfont other-icon">&#xe661;</span>
       </div>
     </div>
-    <div class="evaluation-ft">
-      <span>查看全部175条评价</span><span class="iconfont other-icon">&#xe661;</span>
-    </div>
+    <gallery-banner @close="galleryHandleClick" v-if="showGllery" :list="galleryList" :galleryIndex="galleryIndex"></gallery-banner>
   </div>
 </template>
 <script>
 import StarEvaluation from 'common/evaluation/star-evaluation'
+import GalleryBanner from 'common/gallery/gallery'
 export default {
   name: 'EvaluationList',
   components: {
-    StarEvaluation
+    StarEvaluation,
+    GalleryBanner
   },
   data () {
     return {
       scoreNumber: 4.4,
+      showGllery: false,
+      galleryList: [],
+      galleryIndex: 0,
       list: [
         {
           id: 1,
@@ -79,8 +87,14 @@ export default {
           time: '2018-12-08',
           evaluationMsg: '我是第一次去海底劳龙湖三楼这家店吃东西，真心感受到温馨舒服的感觉，菜品也很好吃，份也足，难怪别人店里晚上和周末要等很久才有位子，里面上班的小哥哥，小姐们让人很开心，工作认真热情，让人感觉宾至如归的感觉，太喜欢了，环境也。很干净，下次还去他家吃饭！',
           evaluationImg: [
-            '//p0.meituan.net/shaitu/4d4709ebe4d08cb885a5c026c8452de51770259.jpg@110w_110h_1e_1c',
-            '//p0.meituan.net/shaitu/396bbf1a72c3ba4c36a298df12d4a2d52089445.jpg@110w_110h_1e_1c'
+            '//p0.meituan.net/60.0/shaitu/f9c2e5f57f2c18d8de571129cad54e771481053.jpg',
+            '//p0.meituan.net/60.0/shaitu/ffffed98c94aebea4d59138920cbbe771665996.jpg',
+            '//p0.meituan.net/60.0/shaitu/a4ad02d68f731370f44ff71034a4541f1548657.jpg'
+          ],
+          evaluationBigImg: [
+            '//p0.meituan.net/400.0/shaitu/f9c2e5f57f2c18d8de571129cad54e771481053.jpg',
+            '//p0.meituan.net/400.0/shaitu/ffffed98c94aebea4d59138920cbbe771665996.jpg',
+            '//p0.meituan.net/400.0/shaitu/a4ad02d68f731370f44ff71034a4541f1548657.jpg'
           ],
           shopAddress: '海底捞火锅（金牛凯德店）',
           showMore: false
@@ -95,6 +109,10 @@ export default {
           evaluationImg: [
             '//p0.meituan.net/shaitu/4d4709ebe4d08cb885a5c026c8452de51770259.jpg@110w_110h_1e_1c',
             '//p0.meituan.net/shaitu/396bbf1a72c3ba4c36a298df12d4a2d52089445.jpg@110w_110h_1e_1c'
+          ],
+          evaluationBigImg: [
+            '//p0.meituan.net/400.0/shaitu/4d4709ebe4d08cb885a5c026c8452de51770259.jpg',
+            '//p0.meituan.net/400.0/shaitu/396bbf1a72c3ba4c36a298df12d4a2d52089445.jpg'
           ],
           shopAddress: '海底捞火锅（龙湖三千集店）',
           showMore: false
@@ -137,6 +155,14 @@ export default {
       console.log(index)
       this.evaluations[index].showMore = !this.evaluations[index].showMore
       console.log(this.evaluations)
+    },
+    galleryHandleClick () {
+      this.showGllery = false
+    },
+    imageHandleClick (index, imgIndex) {
+      this.galleryList = this.evaluations[index].evaluationBigImg
+      this.galleryIndex = imgIndex
+      this.showGllery = true
     }
   }
 }
@@ -199,6 +225,7 @@ export default {
             margin-right: .1rem
             img
               width: 100%
+              max-height: 100%
         .shop-address
           color: #666
     .evaluation-ft

@@ -6,8 +6,7 @@
     <div class="wrapper">
       <swiper :options="swiperOption" ref="mySwiper">
         <!-- slides -->
-        <swiper-slide><img class="item-img" src="//p1.meituan.net/deal/935c1da59b0c4a4a790c836e8bae91ac25953.jpg" alt=""></swiper-slide>
-        <swiper-slide><img class="item-img" src="//p1.meituan.net/440.0/dealwaterb/38ed4e43f0a9a2e80deb075a6413aded18036.jpg" alt=""></swiper-slide>
+        <swiper-slide v-for="(item, index) of list" :key="index"><img class="item-img" :src="item" alt=""></swiper-slide>
         <!-- Optional controls -->
         <!--<div class="swiper-pagination" slot="pagination"></div>-->
       </swiper>
@@ -17,6 +16,17 @@
 <script>
 export default {
   name: 'GalleryBanner',
+  props: {
+    list: {
+      type: Array
+    },
+    galleryIndex: {
+      type: Number,
+      default () {
+        return 0
+      }
+    }
+  },
   data () {
     return {
       swiperOption: {
@@ -29,6 +39,22 @@ export default {
       }
     }
   },
+  computed: {
+    // swiper () {
+    //   console.log(1111)
+    //   return this.$refs.mySwiper.swiper
+    // }
+  },
+  mounted () {
+    console.log('mounted')
+    const swiper = this.$refs.mySwiper.swiper
+    swiper.slideTo(this.galleryIndex, 0, false)
+  },
+  // updated () {
+  //   console.log('updated')
+  //   const swiper = this.$refs.mySwiper.swiper
+  //   swiper.slideTo(this.galleryIndex, 0, false)
+  // },
   methods: {
     galleryHandleClick () {
       this.$emit('close')
@@ -47,6 +73,7 @@ export default {
     background: #000
     flex-direction: column
     justify-content: center
+    z-index: 3
     .item-img
       width: 100%
     .swiper-pagination

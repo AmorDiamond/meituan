@@ -5,8 +5,8 @@
     </div>
     <div class="info border-bottom">
       <div class="info-left">
-        <p class="info-title">海底捞火锅（龙湖三千集店）</p>
-        <p class="info-address">成华区建设北路三段2号龙湖三千集3层成华区建设北路三段2号龙湖三千集3层</p>
+        <p class="info-title">{{shopData.name}}</p>
+        <p class="info-address">{{shopData.address}}</p>
         <p class="info-location"><span class="iconfont location-icon">&#xe662;</span>离我最近</p>
       </div>
       <div class="info-right">
@@ -14,13 +14,28 @@
       </div>
     </div>
     <div class="other-shop">
-      <span>查看全部2家适用分店</span><span class="iconfont other-icon">&#xe661;</span>
+      <span>查看全部{{shopData.shopTotal}}家适用分店</span><span class="iconfont other-icon">&#xe661;</span>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'ShopInformation'
+  name: 'ShopInformation',
+  props: {
+    shopInfo: {
+      type: Object
+    }
+  },
+  computed: {
+    shopData: function () {
+      return {
+        name: this.shopInfo.name,
+        address: this.shopInfo.address,
+        shopTel: this.shopInfo.tel,
+        shopTotal: this.shopInfo.shopTotal
+      }
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>

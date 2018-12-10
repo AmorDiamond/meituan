@@ -1,27 +1,56 @@
 <template>
   <div>
     <div class="banner" @click="bannerHandleClick">
-      <img class="banner-img" src="//p1.meituan.net/deal/935c1da59b0c4a4a790c836e8bae91ac25953.jpg" alt="">
+      <img class="banner-img" :src="bannerData.bannerImg" alt="">
       <div class="banner-info">
         <div class="banner-text">
-          <p class="info-title">海底捞火锅</p>
-          <p class="info-desc">畅享套餐，建议2人使用</p>
+          <p class="info-title">{{bannerData.bannerTitle}}</p>
+          <p class="info-desc">{{bannerData.bannerDesc}}</p>
         </div>
       </div>
     </div>
-    <gallery-banner @close="galleryHandleClick" v-show="showGllery"></gallery-banner>
+    <gallery-banner @close="galleryHandleClick" v-if="showGllery" :list="bannerData.galleryList"></gallery-banner>
   </div>
 </template>
 <script>
-import GalleryBanner from './gallery'
+import GalleryBanner from 'common/gallery/gallery'
+import FadeAnimation from 'common/animation/fadeAnimation'
 export default {
   name: 'DetailBanner',
+  props: {
+    bannerInfo: {
+      type: Object
+    }
+  },
   components: {
-    GalleryBanner
+    GalleryBanner,
+    FadeAnimation
   },
   data () {
     return {
       showGllery: false
+    }
+  },
+  computed: {
+    // bannerTitle: function () {
+    //   return this.bannerInfo.bannerTitle
+    // },
+    // bannerDesc: function () {
+    //   return this.bannerInfo.bannerDesc
+    // },
+    // bannerImg: function () {
+    //   return this.bannerInfo.bannerImg
+    // },
+    // galleryList: function () {
+    //   return this.bannerInfo.galleryList
+    // },
+    bannerData: function () {
+      return {
+        bannerTitle: this.bannerInfo.bannerTitle,
+        bannerDesc: this.bannerInfo.bannerDesc,
+        bannerImg: this.bannerInfo.bannerImg,
+        galleryList: this.bannerInfo.galleryList
+      }
     }
   },
   methods: {

@@ -2,24 +2,20 @@
   <div class="package border-topbottom">
     <div class="hd-title border-bottom">套餐</div>
     <div class="package-bd border-bottom">
-      <div class="item-title border-bottom">畅享套餐</div>
-      <div class="item-list">
-        <div class="item-row">
-          <div class="item-column name border-rightbottom">滑牛肉（100g）</div>
-          <div class="item-column number border-rightbottom">1份</div>
-          <div class="item-column price border-rightbottom">16元</div>
-        </div>
-        <div class="item-row">
-          <div class="item-column name border-rightbottom">抖抖面筋球（面筋球4个，鸡蛋2个）</div>
-          <div class="item-column number border-rightbottom">1份</div>
-          <div class="item-column price border-rightbottom">16元</div>
+      <div v-for="(packageItem, packageIndex) of foodPackageData.packageList" :key="packageIndex">
+        <div class="item-title border-bottom">{{packageItem.name}}</div>
+        <div class="item-list">
+          <div class="item-row" v-for="(item, index) of packageItem.list" :key="index">
+            <div class="item-column name border-rightbottom">{{item.name}}</div>
+            <div class="item-column number border-rightbottom">{{item.number}}</div>
+            <div class="item-column price border-rightbottom">{{item.price}}</div>
+          </div>
         </div>
       </div>
       <div class="item-title border-bottom">备注</div>
       <div class="remark-info">
         <ul class="remark-list">
-          <li>免费提供纸巾</li>
-          <li>免费提供纸巾</li>
+          <li v-for="(item, index) of foodPackageData.remarkList" :key="index">{{item}}</li>
         </ul>
       </div>
     </div>
@@ -30,7 +26,49 @@
 </template>
 <script>
 export default {
-  name: 'FoodPackage'
+  name: 'FoodPackage',
+  props: {
+    foodPackageInfo: {
+      type: Object
+    }
+  },
+  data () {
+    return {
+      // packageList: [
+      //   {
+      //     name: '滑牛肉（100g）',
+      //     number: '1份',
+      //     price: '16元'
+      //   },
+      //   {
+      //     name: '巴沙鱼片（120g)',
+      //     number: '1份',
+      //     price: '14元'
+      //   },
+      //   {
+      //     name: '招牌虾滑（60g）',
+      //     number: '1份',
+      //     price: '18元'
+      //   },
+      //   {
+      //     name: '抖抖面筋球（面筋球4个，鸡蛋2个）',
+      //     number: '1份',
+      //     price: '16元'
+      //   }
+      // ],
+      // remarkList: [
+      //   '免费提供纸巾'
+      // ]
+    }
+  },
+  computed: {
+    foodPackageData: function () {
+      return {
+        packageList: this.foodPackageInfo.packageList,
+        remarkList: this.foodPackageInfo.remarkList
+      }
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -52,6 +90,7 @@ export default {
       display: table
       margin-right: -1px
       font-size: 16px
+      width: 100%
       .item-row
         overflow: hidden
         display: table-row

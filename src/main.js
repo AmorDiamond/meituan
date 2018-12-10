@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import Toast from 'common/toast/index'
 
 import store from '@/store/index'
 import 'swiper/dist/css/swiper.css'
@@ -13,6 +14,7 @@ import 'styles/iconfont.css'
 
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
+Vue.use(Toast)
 
 /* eslint-disable no-new */
 new Vue({

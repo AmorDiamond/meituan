@@ -3,18 +3,38 @@
     <router-link to="/" tag="div" class="header-left"><span class="iconfont back-icon">&#xe680;</span></router-link>
     团购详情
     <div class="header-right">
-      <router-link to="/" tag="div" class="item">
-        <div class="iconfont people-icon">&#xe63a;</div><div class="people-text">收藏</div>
-      </router-link>
-      <router-link to="/search" tag="div" class="item">
+      <div class="item" @click="collectHandleClick">
+        <div class="iconfont people-icon"><span v-if="!collectStatus">&#xe63a;</span><span v-else>&#xe64b;</span></div><div class="people-text">收藏</div>
+      </div>
+      <div class="item" @click="navHandleClick">
         <div class="iconfont people-icon">&#xe611;</div><div class="people-text">导航</div>
-      </router-link>
+      </div>
     </div>
+    <ul class="nav-list" v-show="showNavList">
+      <router-link to="/" tag="li" class="nav-item border-bottom"><span class="iconfont icon-item">&#xe61d;</span>首页</router-link>
+      <li class="nav-item border-bottom"><span class="iconfont icon-item">&#xe636;</span>我的</li>
+    </ul>
   </div>
 </template>
 <script>
 export default {
-  name: 'DetailHeader'
+  name: 'DetailHeader',
+  data () {
+    return {
+      showNavList: false,
+      collectStatus: false
+    }
+  },
+  methods: {
+    navHandleClick () {
+      this.showNavList = !this.showNavList
+    },
+    collectHandleClick () {
+      const msg = this.collectStatus === true ? '取消收藏成功' : '收藏成功'
+      this.collectStatus = !this.collectStatus
+      this.$toast(msg)
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -27,10 +47,11 @@ export default {
     color: #fff
     text-align: center
     font-size: 18px
-    overflow: hidden
     .header-left
       float: left
       padding: 0 .2rem
+      height: inherit
+      overflow: hidden
       .back-icon
         font-size: .6rem
     .header-right
@@ -46,4 +67,19 @@ export default {
       .people-text
         font-size: 12px
         transform: scale(.9)
+    .nav-list
+      position: absolute
+      right: .1rem
+      background: $bgColor
+      z-index: 1
+      margin-top: .05rem
+      font-size: 12px
+      line-height: .7rem
+      width: 2rem
+      .border-bottom
+        &:before
+          border-color: #21897d
+      .icon-item
+        vertical-align: middle
+        margin-right: .1rem
 </style>
