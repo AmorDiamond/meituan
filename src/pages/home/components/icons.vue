@@ -3,10 +3,10 @@
     <swiper :options="swiperOption" ref="mySwiper">
       <!-- slides -->
       <swiper-slide v-for="(item, index) of icons" :key="index">
-        <div class="icon-item" v-for="icon of item" :key="icon.id">
+        <router-link to="/foodChannel" tag="div" class="icon-item" v-for="icon of item" :key="icon.id">
           <span class="iconfont icon" :class="icon.iconClass" :style="{background: icon.iconColor}"></span>
           <p class="icon-desc">{{icon.iconDesc}}</p>
-        </div>
+        </router-link>
       </swiper-slide>
       <!-- Optional controls -->
       <div class="swiper-pagination"  slot="pagination"></div>

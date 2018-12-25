@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/pages/home/home'
 import City from '@/pages/city/city'
 import GroupDetail from '@/pages/groupDetail/detail'
+import FoodMenu from '@/pages/foodMenu/foodMenu'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/groupDetail/:id',
       name: 'GroupDetail',
       component: GroupDetail
+    },
+    {
+      path: '/foodChannel',
+      name: 'FoodMenu',
+      component: FoodMenu
     }
   ],
   scrollBehavior (to, from, savedPosition) {

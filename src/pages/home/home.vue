@@ -10,7 +10,7 @@
 </template>
 <script>
 import HomeHeader from './components/header'
-import HomeBanner from './components/banner'
+import HomeBanner from 'common/banner/banner'
 import HomeIcons from './components/icons'
 import HomeList from './components/list'
 import FadeAnimation from 'common/animation/fadeAnimation'

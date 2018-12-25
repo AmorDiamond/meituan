@@ -2,7 +2,8 @@
   <div class="gallery" @click="galleryHandleClick">
     <!-- Optional controls -->
     <!--将分页器放在swiper容器外，方便设置分页器位置，需要重新定义样式-->
-    <div class="swiper-pagination" :slot="swiperOption.pagination"></div>
+    <!--<div class="swiper-pagination" :slot="swiperOption.pagination"></div>-->
+    <div class="swiper-pagination"></div>
     <div class="wrapper">
       <swiper :options="swiperOption" ref="mySwiper">
         <!-- slides -->
@@ -34,6 +35,7 @@ export default {
           type: 'fraction',
           el: '.swiper-pagination'
         },
+        // uniqueNavElements: false,
         observer: true,
         observeParents: true
       }
