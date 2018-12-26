@@ -1,14 +1,44 @@
 <template>
-  <span class="back-top" @click="backHandleClick">
-    <span class="iconfont back-top-icon">&#xe63d;</span>
-  </span>
+  <fade-animation>
+    <span class="back-top" v-show="computedStatus" @click="backHandleClick">
+      <span class="iconfont back-top-icon">&#xe63d;</span>
+    </span>
+  </fade-animation>
 </template>
 <script>
+import FadeAnimation from 'common/animation/fadeAnimation'
 export default {
   name: 'BackTop',
+  props: {
+    status: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    }
+  },
+  components: {
+    FadeAnimation
+  },
   data () {
     return {
-      timer: null
+      timer: null,
+      showStatus: this.status
+    }
+  },
+  // computed: {
+  //   computedStatus: function () {
+  //     return this.showStatus
+  //   }
+  // },
+  // watch: {
+  //   status (newV) {
+  //     this.showStatus = newV
+  //   }
+  // },
+  computed: {
+    computedStatus: function () {
+      return this.status
     }
   },
   methods: {
@@ -21,6 +51,7 @@ export default {
         const speed = (top - target) / step
         if (top <= 0) {
           clearInterval(this.timer)
+          // this.showStatus = false
           return
         }
         document.documentElement.scrollTop -= speed

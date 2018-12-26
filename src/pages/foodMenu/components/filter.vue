@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="empty-filter-box" v-show="fixedFilter || showFilterList" :style="{'height': filterHeight + 'px'}"></div>
     <div class="filter-box" ref="filter" :class="{'fixed-filter': fixedFilter || showFilterList}">
       <div class="filter border-topbottom">
         <div class="filter-item" :class="{'active': showFilterStatus.allType}" @click="filterHandleClick('allType')">{{filterTypeName}}</div>
@@ -7,14 +8,14 @@
         <div class="filter-item" :class="{'active': showFilterStatus.intelligentSorting}" @click="filterHandleClick('intelligentSorting')">{{filterSortingName}}</div>
         <div class="filter-item" :class="{'active': showFilterStatus.moreFilter}" @click="filterHandleClick('moreFilter')">筛选</div>
       </div>
-      <div class="filter-info" ref="filterInfo" :class="{'my-hide': !showFilterList}">
+      <div class="filter-info" ref="filterInfo" v-show="showFilterList">
         <type-filter-list v-show="showFilterStatus.allType" @chooseFilter="chooseFilterType('filterTypeName', $event)"></type-filter-list>
         <businesses-filter-list v-show="showFilterStatus.nearbyBusinesses" @chooseFilter="chooseFilterType('filterDistrictName', $event)"></businesses-filter-list>
         <sorting-filter-list v-show="showFilterStatus.intelligentSorting" @chooseFilter="chooseFilterType('filterSortingName', $event)"></sorting-filter-list>
         <other-filter-list v-show="showFilterStatus.moreFilter" @chooseFilter="chooseFilterType('filterOther', $event)"></other-filter-list>
       </div>
     </div>
-    <div class="shade" :class="{'my-hide': !showFilterList}" @click="shadeHandleClick"></div>
+    <div class="shade" v-show="showFilterList" @click="shadeHandleClick"></div>
   </div>
 </template>
 <script>
@@ -53,11 +54,13 @@ export default {
       filterTypeName: '全部类目',
       filterDistrictName: '附近商家',
       filterSortingName: '智能排序',
-      filterOther: {}
+      filterOther: {},
+      filterHeight: 0
     }
   },
   mounted () {
     this.filterTop = this.$refs.filter.offsetTop
+    this.filterHeight = this.$refs.filter.offsetHeight
     window.addEventListener('scroll', this.scrollHandle)
     // this.scroll = new BScroll(this.$refs.filterInfo, { click: true, mouseWheel: true })
     // console.log(this.scroll)
@@ -71,6 +74,7 @@ export default {
       for (let item in this.showFilterStatus) {
         if (this.showFilterStatus[item]) {
           status = true
+          break
         }
       }
       console.log(this.showFilterStatus, status)
@@ -80,11 +84,13 @@ export default {
   methods: {
     scrollHandle (e) {
       const scrollTop = document.documentElement.scrollTop + this.headerHeight
-      console.log(e, scrollTop, this.filterTop)
+      // console.log(e, scrollTop, this.filterTop)
       if (scrollTop > this.filterTop) {
         this.fixedFilter = true
+        this.$emit('changeShow', true)
       } else {
         this.fixedFilter = false
+        this.$emit('changeShow', false)
       }
     },
     filterHandleClick (name) {
@@ -135,8 +141,8 @@ export default {
 </script>
 <style lang="stylus" scoped>
   @import "~styles/varibles.styl"
-  .my-hide
-    display: none
+  .empty-filter-box
+    margin-top: .2rem;
   .shade
     position: fixed;
     top: 0;
@@ -147,7 +153,7 @@ export default {
   .fixed-filter
     position: fixed;
     width: 100%;
-    top: .64rem;
+    top: .68rem;
     z-index: 9;
   .filter
     display: flex;
