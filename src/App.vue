@@ -1,12 +1,17 @@
 <template>
   <div id="app">
     <router-view/>
+    <public-footer></public-footer>
   </div>
 </template>
 
 <script>
+import PublicFooter from 'common/footer/public-footer'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    PublicFooter
+  }
 }
 </script>
 

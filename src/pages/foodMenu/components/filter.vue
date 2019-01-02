@@ -141,8 +141,6 @@ export default {
 </script>
 <style lang="stylus" scoped>
   @import "~styles/varibles.styl"
-  .empty-filter-box
-    margin-top: .2rem;
   .shade
     position: fixed;
     top: 0;
@@ -153,11 +151,10 @@ export default {
   .fixed-filter
     position: fixed;
     width: 100%;
-    top: .68rem;
+    top: .9rem;
     z-index: 9;
   .filter
     display: flex;
-    margin-top: .2rem;
     line-height: .84rem;
     background: #fff;
     text-align: center;

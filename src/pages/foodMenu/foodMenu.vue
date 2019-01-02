@@ -64,7 +64,7 @@ export default {
           iconColor: '#fd9d21',
           iconUrl: '//p0.meituan.net/codeman/050ce6754d32482c75273e292407f2b312356.png',
           iconDesc: '火锅',
-          link: '/foodChannel'
+          linkQuery: '火锅'
         },
         {
           id: 2,
@@ -72,7 +72,7 @@ export default {
           iconColor: '#ff6767',
           iconUrl: '//p0.meituan.net/codeman/e5277d18a450c1fe51c6cda9cff6a9e016621.png',
           iconDesc: '甜点饮品',
-          link: ''
+          linkQuery: '甜点饮品'
         },
         {
           id: 3,
@@ -80,7 +80,7 @@ export default {
           iconColor: '#8a90fa',
           iconUrl: '//p1.meituan.net/codeman/962b082a549e88f2939dbee2ac3d235613019.png',
           iconDesc: '自助餐',
-          link: ''
+          linkQuery: '自助餐'
         },
         {
           id: 4,
@@ -88,7 +88,7 @@ export default {
           iconColor: '#fed030',
           iconUrl: '//p0.meituan.net/codeman/12ff749bd7fdf473abd59e2651a9ee1913684.png',
           iconDesc: '小吃快餐',
-          link: ''
+          linkQuery: '小吃快餐'
         },
         {
           id: 5,
@@ -96,7 +96,7 @@ export default {
           iconColor: '#fd9d21',
           iconUrl: '//p0.meituan.net/codeman/0fe84029cc6cf6ccf12838ce6546734a16488.png',
           iconDesc: '西餐',
-          link: ''
+          linkQuery: '西餐'
         },
         {
           id: 6,
@@ -104,7 +104,7 @@ export default {
           iconColor: '#fed030',
           iconUrl: '//p0.meituan.net/codeman/2ae734d26259e6138ea61f2dcdac8fa115018.png',
           iconDesc: '烧烤烤肉',
-          link: ''
+          linkQuery: '烧烤烤肉'
         },
         {
           id: 7,
@@ -112,7 +112,7 @@ export default {
           iconColor: '#4dc6ee',
           iconUrl: '//p1.meituan.net/codeman/a7c360a9aeca1f972a1819465154c6b414043.png',
           iconDesc: '香锅烤鱼',
-          link: ''
+          linkQuery: '香锅烤鱼'
         },
         {
           id: '008',
@@ -120,7 +120,7 @@ export default {
           iconColor: '#ff80c2',
           iconUrl: '//p1.meituan.net/codeman/13a0d1537d45b237a07b665eb5a7845e17141.png',
           iconDesc: '海鲜',
-          link: ''
+          linkQuery: '海鲜'
         }
       ],
       shopList: [
@@ -252,6 +252,7 @@ export default {
   mounted () {
     this.shopContainerTop = this.$refs.shopContainer.offsetTop
     this.mobileHeight = document.documentElement.clientHeight
+    // this.$store.dispatch('changeBackRouter', '/foodChannel')
     window.addEventListener('scroll', this.scrollHandle)
   },
   destroyed () {

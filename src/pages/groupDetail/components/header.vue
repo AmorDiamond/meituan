@@ -1,6 +1,7 @@
 <template>
   <div class="header border-bottom">
-    <router-link to="/" tag="div" class="header-left"><span class="iconfont back-icon">&#xe680;</span></router-link>
+    <!--<router-link :to="backRouter ? backRouter : '/'" tag="div" class="header-left"><span class="iconfont back-icon">&#xe680;</span></router-link>-->
+    <div @click="back" class="header-left"><span class="iconfont back-icon">&#xe680;</span></div>
     团购详情
     <div class="header-right">
       <div class="item" @click="collectHandleClick">
@@ -27,12 +28,16 @@ export default {
   },
   methods: {
     navHandleClick () {
+      console.log(this.backRouter)
       this.showNavList = !this.showNavList
     },
     collectHandleClick () {
       const msg = this.collectStatus === true ? '取消收藏成功' : '收藏成功'
       this.collectStatus = !this.collectStatus
       this.$toast(msg)
+    },
+    back () {
+      history.back(-1)
     }
   }
 }

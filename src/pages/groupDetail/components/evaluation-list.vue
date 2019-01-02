@@ -4,7 +4,7 @@
       <div class="hd-title border-bottom">
         <span>评价</span>
         <div class="star-evaluation">
-          <star-evaluation :scoreNumber="scoreNumber"></star-evaluation>
+          <star-evaluation :scoreNumber="evaluationInfo.scoreNumber"></star-evaluation>
         </div>
       </div>
       <div class="list border-bottom">
@@ -45,8 +45,8 @@
           </div>
           <div class="item-desc" @click="descHandleClick(index)">
             <span v-for="(message, msgindex) of item.evaluationMsg" :key="msgindex" :class="{'hidden-msg': hiddenMsg(item, msgindex)}">{{message}}</span>
-            <span class="empty-msg" v-show="!item.showMore">......</span>
-            <span class="iconfont show-more-icon" v-if="item.evaluationMsg.length" :class="{'active-icon': item.showMore}">&#xe600;</span>
+            <span class="empty-msg" v-show="!item.showMore && (item.evaluationMsg.length > 1)">......</span>
+            <span class="iconfont show-more-icon" v-if="item.evaluationMsg.length > 1" :class="{'active-icon': item.showMore}">&#xe600;</span>
           </div>
           <div class="img-box">
           <span class="img-con" v-for="(image, imgindex) of item.evaluationImg" :key="imgindex" @click="imageHandleClick(index,imgindex)">
@@ -68,74 +68,84 @@ import StarEvaluation from 'common/evaluation/star-evaluation'
 import GalleryBanner from 'common/gallery/gallery'
 export default {
   name: 'EvaluationList',
+  props: {
+    evaluationInfo: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
+  },
   components: {
     StarEvaluation,
     GalleryBanner
   },
   data () {
     return {
-      scoreNumber: 4.4,
       showGllery: false,
-      galleryList: [],
       galleryIndex: 0,
-      list: [
-        {
-          id: 1,
-          nickname: '伊灵舞',
-          avatarUrl: 'https://img.meituan.net/avatar/9cd231a9428adcdbf7f3de4c24425a8b67676.jpg@74w_74h_1e_1c',
-          scoreNumber: 5,
-          time: '2018-12-08',
-          evaluationMsg: '我是第一次去海底劳龙湖三楼这家店吃东西，真心感受到温馨舒服的感觉，菜品也很好吃，份也足，难怪别人店里晚上和周末要等很久才有位子，里面上班的小哥哥，小姐们让人很开心，工作认真热情，让人感觉宾至如归的感觉，太喜欢了，环境也。很干净，下次还去他家吃饭！',
-          evaluationImg: [
-            '//p0.meituan.net/60.0/shaitu/f9c2e5f57f2c18d8de571129cad54e771481053.jpg',
-            '//p0.meituan.net/60.0/shaitu/ffffed98c94aebea4d59138920cbbe771665996.jpg',
-            '//p0.meituan.net/60.0/shaitu/a4ad02d68f731370f44ff71034a4541f1548657.jpg'
-          ],
-          evaluationBigImg: [
-            '//p0.meituan.net/400.0/shaitu/f9c2e5f57f2c18d8de571129cad54e771481053.jpg',
-            '//p0.meituan.net/400.0/shaitu/ffffed98c94aebea4d59138920cbbe771665996.jpg',
-            '//p0.meituan.net/400.0/shaitu/a4ad02d68f731370f44ff71034a4541f1548657.jpg'
-          ],
-          shopAddress: '海底捞火锅（金牛凯德店）',
-          showMore: false
-        },
-        {
-          id: 2,
-          nickname: '昵称',
-          avatarUrl: '//p0.meituan.net/mmc/35ad1f9253761ea6ff822b5e659f234f3758.png@74w_74h_1e_1c',
-          scoreNumber: 4,
-          time: '2018-11-08',
-          evaluationMsg: '第一次来吃！服务比起行业里面算好的！环境OK！还给我约免费指甲！也是一个亮点！刚开始准备点几个菜的！服务员叫我们先吃完在点！才发现碗多！东西少！不代表不够吃！最后没有吃完😅😅😅……说真的那个小碗上菜！确实拉低档次！可以用两个和蒸笼大小的盒子！一个荤一个素！可以学一下一品鲜鲍！ #捞派捞面# #番茄锅底# #捞派滑牛肉# #无刺巴沙鱼片# #小酥肉#',
-          evaluationImg: [
-            '//p0.meituan.net/shaitu/4d4709ebe4d08cb885a5c026c8452de51770259.jpg@110w_110h_1e_1c',
-            '//p0.meituan.net/shaitu/396bbf1a72c3ba4c36a298df12d4a2d52089445.jpg@110w_110h_1e_1c'
-          ],
-          evaluationBigImg: [
-            '//p0.meituan.net/400.0/shaitu/4d4709ebe4d08cb885a5c026c8452de51770259.jpg',
-            '//p0.meituan.net/400.0/shaitu/396bbf1a72c3ba4c36a298df12d4a2d52089445.jpg'
-          ],
-          shopAddress: '海底捞火锅（龙湖三千集店）',
-          showMore: false
-        }
-      ],
-      evaluations: []
+      galleryList: []
+      // list: [
+      //   {
+      //     id: 1,
+      //     nickname: '伊灵舞',
+      //     avatarUrl: 'https://img.meituan.net/avatar/9cd231a9428adcdbf7f3de4c24425a8b67676.jpg@74w_74h_1e_1c',
+      //     scoreNumber: 5,
+      //     time: '2018-12-08',
+      //     evaluationMsg: '我是第一次去海底劳龙湖三楼这家店吃东西，真心感受到温馨舒服的感觉，菜品也很好吃，份也足，难怪别人店里晚上和周末要等很久才有位子，里面上班的小哥哥，小姐们让人很开心，工作认真热情，让人感觉宾至如归的感觉，太喜欢了，环境也。很干净，下次还去他家吃饭！',
+      //     evaluationImg: [
+      //       '//p0.meituan.net/60.0/shaitu/f9c2e5f57f2c18d8de571129cad54e771481053.jpg',
+      //       '//p0.meituan.net/60.0/shaitu/ffffed98c94aebea4d59138920cbbe771665996.jpg',
+      //       '//p0.meituan.net/60.0/shaitu/a4ad02d68f731370f44ff71034a4541f1548657.jpg'
+      //     ],
+      //     evaluationBigImg: [
+      //       '//p0.meituan.net/400.0/shaitu/f9c2e5f57f2c18d8de571129cad54e771481053.jpg',
+      //       '//p0.meituan.net/400.0/shaitu/ffffed98c94aebea4d59138920cbbe771665996.jpg',
+      //       '//p0.meituan.net/400.0/shaitu/a4ad02d68f731370f44ff71034a4541f1548657.jpg'
+      //     ],
+      //     shopAddress: '海底捞火锅（金牛凯德店）',
+      //     showMore: false
+      //   },
+      //   {
+      //     id: 2,
+      //     nickname: '昵称',
+      //     avatarUrl: '//p0.meituan.net/mmc/35ad1f9253761ea6ff822b5e659f234f3758.png@74w_74h_1e_1c',
+      //     scoreNumber: 4,
+      //     time: '2018-11-08',
+      //     evaluationMsg: '第一次来吃！服务比起行业里面算好的！环境OK！还给我约免费指甲！也是一个亮点！刚开始准备点几个菜的！服务员叫我们先吃完在点！才发现碗多！东西少！不代表不够吃！最后没有吃完😅😅😅……说真的那个小碗上菜！确实拉低档次！可以用两个和蒸笼大小的盒子！一个荤一个素！可以学一下一品鲜鲍！ #捞派捞面# #番茄锅底# #捞派滑牛肉# #无刺巴沙鱼片# #小酥肉#',
+      //     evaluationImg: [
+      //       '//p0.meituan.net/shaitu/4d4709ebe4d08cb885a5c026c8452de51770259.jpg@110w_110h_1e_1c',
+      //       '//p0.meituan.net/shaitu/396bbf1a72c3ba4c36a298df12d4a2d52089445.jpg@110w_110h_1e_1c'
+      //     ],
+      //     evaluationBigImg: [
+      //       '//p0.meituan.net/400.0/shaitu/4d4709ebe4d08cb885a5c026c8452de51770259.jpg',
+      //       '//p0.meituan.net/400.0/shaitu/396bbf1a72c3ba4c36a298df12d4a2d52089445.jpg'
+      //     ],
+      //     shopAddress: '海底捞火锅（龙湖三千集店）',
+      //     showMore: false
+      //   }
+      // ]
+      // evaluations: []
     }
   },
   mounted () {
-    this.formatEvaluationMsg()
+    // this.formatEvaluationMsg()
   },
   computed: {
     hiddenMsg () {
       return function (item, index) {
         return !item.showMore && index > 0
       }
-    }
-  },
-  methods: {
-    formatEvaluationMsg () {
+    },
+    evaluations () {
+      // 因为数据是异步请求过来的，所以需要在计算属性里处理数据。
+      console.log('data', this.evaluationInfo)
       const defaultLen = 80
       const evaluations = []
-      this.list.forEach(item => {
+      if (!this.evaluationInfo.lists) {
+        return evaluations
+      }
+      this.evaluationInfo.lists.forEach(item => {
         const messages = []
         const len = item.evaluationMsg.length
         if (len > defaultLen) {
@@ -148,9 +158,37 @@ export default {
         item['showMore'] = false
         evaluations.push(item)
       })
-      this.evaluations = evaluations
+      // this.evaluations = evaluations
       console.log('evaluations', evaluations)
-    },
+      return evaluations
+    }
+  },
+  // watch: {
+  //   evaluationInfo: function (newV) {
+  //     console.log('newV', newV)
+  //   }
+  // },
+  methods: {
+    // formatEvaluationMsg () {
+    //   console.log('data', this.evaluationInfo)
+    //   const defaultLen = 80
+    //   const evaluations = []
+    //   this.list.forEach(item => {
+    //     const messages = []
+    //     const len = item.evaluationMsg.length
+    //     if (len > defaultLen) {
+    //       messages[0] = item.evaluationMsg.substr(0, defaultLen)
+    //       messages[1] = item.evaluationMsg.substr(defaultLen)
+    //     } else {
+    //       messages[0] = item.evaluationMsg
+    //     }
+    //     item.evaluationMsg = messages
+    //     item['showMore'] = false
+    //     evaluations.push(item)
+    //   })
+    //   this.evaluations = evaluations
+    //   console.log('evaluations', evaluations)
+    // },
     descHandleClick (index) {
       console.log(index)
       this.evaluations[index].showMore = !this.evaluations[index].showMore
@@ -223,6 +261,7 @@ export default {
             width: 1.1rem
             height: 1.1rem
             margin-right: .1rem
+            margin-bottom: .1rem
             img
               width: 100%
               max-height: 100%

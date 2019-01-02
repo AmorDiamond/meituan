@@ -36,6 +36,7 @@ export default {
           el: '.swiper-pagination'
         },
         // uniqueNavElements: false,
+        autoHeight: true,
         observer: true,
         observeParents: true
       }

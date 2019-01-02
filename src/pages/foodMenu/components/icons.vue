@@ -3,7 +3,7 @@
     <swiper :options="swiperOption" ref="mySwiper">
       <!-- slides -->
       <swiper-slide v-for="(item, index) of icons" :key="index">
-        <router-link tag="div" class="icon-item" v-for="icon of item" :key="icon.id" :to="icon.link">
+        <router-link tag="div" class="icon-item" v-for="icon of item" :key="icon.id" :to="{path: '/foodCategory', query: {name: icon.linkQuery}}">
           <span class="icon"><img :src="icon.iconUrl" alt=""></span>
           <p class="icon-desc">{{icon.iconDesc}}</p>
         </router-link>
@@ -73,6 +73,7 @@ export default {
     overflow: hidden;
     padding-bottom: 48%
     background: #fff
+    margin-bottom: .2rem;
     .swiper-pagination
       bottom: -8px
     .icon-item

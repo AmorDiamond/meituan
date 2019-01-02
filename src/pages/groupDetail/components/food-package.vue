@@ -12,8 +12,8 @@
           </div>
         </div>
       </div>
-      <div class="item-title border-bottom">备注</div>
-      <div class="remark-info">
+      <div class="item-title border-bottom" v-if="foodPackageData.remarkList && foodPackageData.remarkList.length">备注</div>
+      <div class="remark-info" v-if="foodPackageData.remarkList && foodPackageData.remarkList.length">
         <ul class="remark-list">
           <li v-for="(item, index) of foodPackageData.remarkList" :key="index">{{item}}</li>
         </ul>

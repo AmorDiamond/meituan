@@ -13,7 +13,7 @@
         <div class="iconfont phone-icon border-left">&#xe6f3;</div>
       </div>
     </div>
-    <div class="other-shop">
+    <div class="other-shop" v-if="shopData.shopTotal">
       <span>查看全部{{shopData.shopTotal}}家适用分店</span><span class="iconfont other-icon">&#xe661;</span>
     </div>
   </div>
