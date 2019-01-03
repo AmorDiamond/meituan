@@ -5,6 +5,7 @@ import City from '@/pages/city/city'
 import GroupDetail from '@/pages/groupDetail/detail'
 import FoodMenu from '@/pages/foodMenu/foodMenu'
 import FoodCategory from '@/pages/foodMenu/category/category'
+import CategoryMenu from '@/pages/categoryMenu/category'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/foodCategory',
       name: 'FoodCategory',
       component: FoodCategory
+    },
+    {
+      path: '/category',
+      name: 'CategoryMenu',
+      component: CategoryMenu
     }
   ],
   scrollBehavior (to, from, savedPosition) {

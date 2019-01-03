@@ -1216,9 +1216,13 @@ export default {
       .district-item
         line-height: .8rem;
         padding: 0 .2rem 0 .4rem;
+        display: flex;
         &.active
           background: #f2f2f2;
           color: $bgColor
+        .filter-text
+          flex: 1;
+          ellipsis();
         .number-con
           float: right;
           .number
@@ -1230,7 +1234,7 @@ export default {
             padding: .02rem .15rem;
           .more-number:after
             content: '>';
-            transform: scale(.8, 1.2) translateY(-.02rem);
+            transform: scale(.8, 1.2);
             display: inline-block;
             margin-left: .05rem;
       .district-right
@@ -1246,4 +1250,5 @@ export default {
           .number-con .number
             color: #999;
             background: none;
+            padding: 0;
 </style>

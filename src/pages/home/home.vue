@@ -43,77 +43,77 @@ export default {
           iconClass: 'icon-meishi',
           iconColor: '#fd9d21',
           iconDesc: '美食',
-          link: ''
+          link: '/foodChannel'
         },
         {
           id: 2,
           iconClass: 'icon-Artboard',
           iconColor: '#ff6767',
           iconDesc: '猫眼电影',
-          link: ''
+          link: '/foodChannel'
         },
         {
           id: 3,
           iconClass: 'icon-jiudian',
           iconColor: '#8a90fa',
           iconDesc: '酒店',
-          link: ''
+          link: '/foodChannel'
         },
         {
           id: 4,
           iconClass: 'icon-xiuxianyule',
           iconColor: '#fed030',
           iconDesc: '休闲娱乐',
-          link: ''
+          link: '/foodChannel'
         },
         {
           id: 5,
           iconClass: 'icon-icon-test',
           iconColor: '#fd9d21',
           iconDesc: '外卖',
-          link: ''
+          link: '/foodChannel'
         },
         {
           id: 6,
           iconClass: 'icon-KTV',
           iconColor: '#fed030',
           iconDesc: 'KTV',
-          link: ''
+          link: '/foodChannel'
         },
         {
           id: 7,
           iconClass: 'icon-zhoubianyou',
           iconColor: '#4dc6ee',
           iconDesc: '周边游',
-          link: ''
+          link: '/foodChannel'
         },
         {
           id: '008',
           iconClass: 'icon-liren',
           iconColor: '#ff80c2',
           iconDesc: '丽人',
-          link: ''
+          link: '/foodChannel'
         },
         {
           id: 9,
           iconClass: 'icon-xiaochikuaican',
           iconColor: '#fd9d21',
           iconDesc: '小吃快餐',
-          link: ''
+          link: '/foodChannel'
         },
         {
           id: 10,
           iconClass: 'icon-huochepiao',
           iconColor: '#599eec',
           iconDesc: '火车票',
-          link: ''
+          link: '/foodChannel'
         },
         {
           id: 11,
           iconClass: 'icon-diandiandian1',
           iconColor: '#00d3be',
           iconDesc: '全部分类',
-          link: ''
+          link: '/category'
         }
       ],
       likeList: []
