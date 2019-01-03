@@ -1,17 +1,17 @@
 <template>
   <div class="category">
-    <cate-header></cate-header>
+    <simple-header :title="'选择分类'"></simple-header>
     <cate-list :cateInfo="cateData"></cate-list>
   </div>
 </template>
 <script>
-import CateHeader from './components/header'
+import SimpleHeader from 'common/header/simple-header'
 import CateList from './components/list'
 import axios from 'axios'
 export default {
   name: 'CategoryMenu',
   components: {
-    CateHeader,
+    SimpleHeader,
     CateList
   },
   data () {

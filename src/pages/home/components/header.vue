@@ -1,7 +1,7 @@
 <template>
   <div class="header border-bottom">
     <router-link to="/city" tag="div" class="header-left">{{city}}<span class="iconfont">&#xe600;</span></router-link>
-    <div class="header-input"><span class="search-icon iconfont">&#xe618;</span>输入商家/品类/商圈</div>
+    <router-link to="/search" tag="div" class="header-input"><span class="search-icon iconfont">&#xe618;</span>输入商家/品类/商圈</router-link>
     <div class="header-right"><div class="iconfont people-icon">&#xe636;</div><div class="people-text">我的</div></div>
   </div>
 </template>

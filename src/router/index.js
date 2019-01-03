@@ -6,6 +6,7 @@ import GroupDetail from '@/pages/groupDetail/detail'
 import FoodMenu from '@/pages/foodMenu/foodMenu'
 import FoodCategory from '@/pages/foodMenu/category/category'
 import CategoryMenu from '@/pages/categoryMenu/category'
+import Search from '@/pages/search/search'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/category',
       name: 'CategoryMenu',
       component: CategoryMenu
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search
     }
   ],
   scrollBehavior (to, from, savedPosition) {

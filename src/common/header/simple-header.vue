@@ -1,7 +1,7 @@
 <template>
   <div class="header border-bottom">
     <router-link to="/" tag="div" class="header-left"><span class="iconfont back-icon">&#xe680;</span></router-link>
-    选择分类
+    {{title}}
     <div class="header-right">
       <router-link to="/" tag="div" class="item">
         <div class="iconfont people-icon">&#xe61d;</div><div class="people-text">首页</div>
@@ -11,7 +11,12 @@
 </template>
 <script>
 export default {
-  name: 'CateHeader'
+  name: 'CateHeader',
+  props: {
+    title: {
+      type: String
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>

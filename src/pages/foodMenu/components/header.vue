@@ -1,7 +1,7 @@
 <template>
   <div class="header" :class="{'fixed-header': fixedHead}">
     <div @click="back" class="header-left iconfont">&#xe605;</div>
-    <div class="header-input"><span class="iconfont search-icon">&#xe618;</span>输入商家名、品类或商圈</div>
+    <router-link to="/search" tag="div" class="header-input"><span class="iconfont search-icon">&#xe618;</span>输入商家名、品类或商圈</router-link>
     <div class="header-right iconfont">&#xe636;</div>
   </div>
 </template>
