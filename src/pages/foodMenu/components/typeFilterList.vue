@@ -74,6 +74,7 @@ export default {
     }
   },
   mounted () {
+    this.filterTypeName = this.$route.query.name ? this.$route.query.name : this.filterTypeName
   },
   methods: {
     typeFilterHandleClick (type, e) {

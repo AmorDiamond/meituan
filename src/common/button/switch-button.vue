@@ -12,13 +12,9 @@ export default {
       }
     }
   },
-  data () {
-    return {
-      switchStatusData: this.status
-    }
-  },
   computed: {
     switchStatus: function () {
+      console.log('computedswitchStatus', this.status)
       return this.status
     }
   },
@@ -30,8 +26,8 @@ export default {
   // },
   methods: {
     switchHandleClick () {
-      this.switchStatusData = !this.switchStatusData
-      this.$emit('switchHandleClick', this.switchStatusData)
+      const switchStatusData = !this.switchStatus
+      this.$emit('switchHandleClick', switchStatusData)
     }
   }
 }

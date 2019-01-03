@@ -1,17 +1,34 @@
 <template>
-  <div class="header">
-    <router-link to="/" tag="div" class="header-left iconfont">&#xe605;</router-link>
+  <div class="header" :class="{'fixed-header': fixedHead}">
+    <div @click="back" class="header-left iconfont">&#xe605;</div>
     <div class="header-input"><span class="iconfont search-icon">&#xe618;</span>输入商家名、品类或商圈</div>
     <div class="header-right iconfont">&#xe636;</div>
   </div>
 </template>
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  props: {
+    fixedHead: {
+      type: Boolean,
+      default () {
+        return true
+      }
+    }
+  },
+  methods: {
+    back () {
+      history.back(-1)
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
   @import "~styles/varibles.styl"
+  .fixed-header
+    position: fixed;
+    width: 100%;
+    z-index: 2;
   .header
     display: flex;
     line-height: .9rem;

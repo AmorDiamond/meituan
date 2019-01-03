@@ -6,7 +6,7 @@
         <button>注册</button>
       </div>
       <div class="row-right">
-        城市：<router-link to="/city" tag="span" class="city">成都</router-link>
+        城市：<router-link to="/city" tag="span" class="city">{{storeCity}}</router-link>
       </div>
     </div>
     <ul class="row-menu">
@@ -16,17 +16,27 @@
       <li class="menu-item">电脑版</li>
       <li class="menu-item">帮助</li>
     </ul>
+    <div class="copyright">
+      <span class="text">&copy;2019 美团网 <a href="">京ICP证070791号</a></span>
+    </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'PublicFooter'
+  name: 'PublicFooter',
+  computed: {
+    // storeCity: function () {
+    //   return this.$store.state.city
+    // },
+    ...mapState({storeCity: 'city'})
+  }
 }
 </script>
 <style lang="stylus" scoped>
   @import "~styles/varibles.styl"
   .footer
-    padding: .1rem .2rem;
+    padding: .2rem;
     .row-one
       overflow: hidden;
       line-height: .8rem;
@@ -60,4 +70,24 @@ export default {
         text-align: center;
         &:last-child
           border: none;
+    .copyright
+      color: #999;
+      text-align: center;
+      overflow: hidden;
+      a
+        color: #999;
+      .text
+        position: relative;
+        font-size: 12px;
+        &:before,&:after
+          content: '';
+          position: absolute;
+          width: 100%;
+          border-bottom: 1px solid;
+          top: 6px;
+          transform: scaleY(.5);
+        &:before
+          right: 105%;
+        &:after
+          left: 105%;
 </style>

@@ -251,7 +251,7 @@ export default {
   },
   mounted () {
     this.shopContainerTop = this.$refs.shopContainer.offsetTop
-    this.mobileHeight = document.documentElement.clientHeight
+    this.mobileHeight = document.documentElement.clientHeight || document.body.clientHeight
     // this.$store.dispatch('changeBackRouter', '/foodChannel')
     window.addEventListener('scroll', this.scrollHandle)
   },
@@ -264,9 +264,9 @@ export default {
     },
     scrollHandle (e) {
       const shopListHeight = this.$refs.shopContainer.offsetHeight
-      const scrollTop = document.documentElement.scrollTop
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
       const scrollHeight = this.shopContainerTop + shopListHeight - this.mobileHeight
-      if (scrollTop >= scrollHeight) {
+      if (scrollTop >= scrollHeight && !this.showLoadingMore) {
         this.getShopList()
       }
     },
@@ -283,12 +283,12 @@ export default {
   }
 }
 </script>
-<style lang="stylus" scope>
+<style lang="stylus" scoped>
   @import "~styles/varibles.styl"
-  .channel-header
+  /*.channel-header
     position: fixed;
     width: 100%;
-    z-index: 2;
+    z-index: 2;*/
   .channel-bd
     padding-top: $channelHeaderHeight;
   .shop-list

@@ -61,6 +61,7 @@ export default {
   mounted () {
     this.filterTop = this.$refs.filter.offsetTop
     this.filterHeight = this.$refs.filter.offsetHeight
+    this.filterTypeName = this.$route.query.name ? this.$route.query.name : this.filterTypeName
     window.addEventListener('scroll', this.scrollHandle)
     // this.scroll = new BScroll(this.$refs.filterInfo, { click: true, mouseWheel: true })
     // console.log(this.scroll)
@@ -83,7 +84,8 @@ export default {
   },
   methods: {
     scrollHandle (e) {
-      const scrollTop = document.documentElement.scrollTop + this.headerHeight
+      const top = document.documentElement.scrollTop || document.body.scrollTop
+      const scrollTop = top + this.headerHeight
       // console.log(e, scrollTop, this.filterTop)
       if (scrollTop > this.filterTop) {
         this.fixedFilter = true
@@ -131,6 +133,9 @@ export default {
           intelligentSorting: false,
           moreFilter: false
         }
+      }
+      if (type === 'filterTypeName') {
+        this.$emit('changeFilter', res)
       }
     },
     chooseDistrictFilter (type, res) {
